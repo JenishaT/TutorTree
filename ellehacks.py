@@ -5,21 +5,34 @@
 # def profile: #(checks if user is a tutee or tutor)
 # def find_tutee:
 # def find_tutor:
-#jfjds
-subjects = []
+# log out page that goes back to the homepage
 
+def change_username():
+    print("Please choose your new username.")
+    username = input("")
+    return username
+    
+def change_password():
+    print("Please choose your new password.")
+    password = input("")   
+    return password
+    
 def set_username_and_password():
-    # username
     print("Please enter your first name.")
     fname = input("")
     print("Please enter your last name.")
     lname = input("")
     full_name = fname + lname
     
-    # password (if time in end then make this more secure and have security questions and etc.
+    print("Please enter your username")
+    username = input("")
+    
     print("Please choose a password.")
-    password = input("")    
+    password = input("")
+    
+    return full_name, username, password
 
+    
 def set_grade_level():
     print("Please indicate your current level of education by typing 'P' for primary (grades 1 - 8),\n'S' for secondary (grades 9 - 12), or 'PS' for post secondary (university/college level education)")
     while True:
@@ -34,97 +47,88 @@ def set_grade_level():
             grade_year = int(input(""))
             if education_level == 'p':
                 if not 1 <= grade_year <= 8:
-                    print("Sorry, your grade is not primary level. Please enter a primary level grade.") 
+                    print("Sorry, your grade is not primary level. Please enter a primary grade level (grades 1 - 8).") 
                 else:
                     break
             if education_level == 's':
                 if not 9 <= grade_year <= 12:
-                    print("Sorry, your grade is not secondary level. Please enter a secondary level grade.") 
+                    print("Sorry, your grade is not secondary level. Please enter a secondary grade level (grades 9 - 12).") 
                 else:
                     break 
             if education_level == 'ps':
                 if not 1 <= grade_year <= 7:
-                    print("Sorry, your grade is not post secondary level. Please enter a post secondary level grade.") 
+                    print("Sorry, your grade is not post secondary level. Please enter a post secondary grade level (years 1 - 6).") 
                 else:
-                    break                
+                    break    
+        return education_level, grade_year
 
-def sign_up_tutee():
-    set_username_and_password()
-    
-    set_grade_level()
-    
-    # grade level
-    print("Please indicate your current level of education by typing 'P' for primary (grades 1 - 8),\n'S' for secondary (grades 9 - 12), or 'PS' for post secondary (university/college level education)")
-    while True:
-        education_level = input("").lower().strip()
-        if education_level == 'p' or education_level == 's' or education_level == 'PS':         
-            break
-        else:
-            print("Sorry, please enter either 'P', 'S', or 'PS")
-            
-    while True:
-            print("Please indicate your current year of study.")
-            grade_year = int(input(""))
-            if education_level == 'p':
-                if not 1 <= grade_year <= 8:
-                    print("Sorry, your grade is not primary level. Please enter a primary level grade.") 
-                else:
-                    break
-            if education_level == 's':
-                if not 9 <= grade_year <= 12:
-                    print("Sorry, your grade is not secondary level. Please enter a secondary level grade.") 
-                else:
-                    break 
-            if education_level == 'ps':
-                if not 1 <= grade_year <= 7:
-                    print("Sorry, your grade is not post secondary level. Please enter a post secondary level grade.") 
-                else:
-                    break            
-    
-    # location (city)
+def set_location():
     print("Please enter your city (so that we can find tutors near yooouuuuuuuu crank that souja boi!)")
-    location = input("")
-    
-    # preferred sex
-    print("What is your preferred sex? Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
+    location = input("")   
+    return location
+
+def set_preferred_sex():
+    print("What is your preferred sex for a tutor? Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
     while True:
         response = input("").lower().strip()        
         if response == 'f' or response == 'm' or response == 'd':
             preferred_sex = response
-            print("Your preferred sex is ", response)
+            print("Your preferred sex is", response)
             break
         else:
-            print("Sorry, please enter either 'F', 'M', or 'D'")    
-    
-    # subjects
+            print("Sorry, please enter either 'F', 'M', or 'D'")  
+        return preferred_sex
+
+def set_subjects():
+    subjects = []    
     print("Please specify the subject you would like to learn.")  
     subject = input("").lower().strip()
     subjects.append(subject)
     while True:
-        print("If you would like to learn anything else, please enter that subject. Or, type '0' if you are finished specifying errthang.")
+        print("If you would like to learn/teach anything else, please enter that subject. Or, type '0' if you are finished specifying errthang.")
         subject = input("")
         if subject == '0':
             break
         subjects.append(subject)
-    
-    # price (INCOMPLETE, still have to validate et)
+        
+def set_price_range():
+    ####INCOMPLETE HAVE TO VALIDATE THIS!!!!!!!!####
     print("Please specify your price range.")
-    min = int(input("Min: $"))
-    max = int(input("Max: $"))
+    min_price = int(input("Min: $"))
+    max_price = int(input("Max: $"))    
+    return min_price, max_price
     
-    # weboption or chill?
+def set_weboption_or_chill():
     print("Would you like to add a webcam tutor session option? Type 'Y' for yes or 'N' for no.")    
     while True:
         response = input("").lower().strip()        
         if response == 'y':
             weboption = True
+            print("You can now find tutors who offer webcam tutoring sessions!")
             break
         elif response == 'n':
             weboption = False
             break
         else:
+            print("You will not be able to find tutors who offer webcam tutoring sessions!")            
             print("Sorry, please enter either 'Y' or 'N'") 
-    
+    return weboption
+
+def review_information():
+    pass
+    #INCOMPLETE. FINISH THIS
+
+def sign_up_tutee():
+    full_name, username, password = set_username_and_password()
+    education_level, grade_year = set_grade_level()
+    location = set_location()
+    preferred_sex = set_preferred_sex()
+    subjects = set_subjects()
+    min_price, max_price = set_price_range()
+    weboption = set_weboption_or_chill()
+        
+    ## INCOMPLETE, ASK TO REVIEW INFORMATION.
+    print("Congratulations! You have successfully signed up as a tutee.\n Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
     
     
     
