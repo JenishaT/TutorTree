@@ -14,7 +14,6 @@ from tutor import Tutor
 tutees = [] 
 tutors = []
 
-
 def change_username():
     print("Please choose your new username.")
     username = input("")
@@ -86,12 +85,22 @@ def set_preferred_sex():
             print("Sorry, please enter either 'F', 'M', or 'D'")  
     return preferred_sex
 
+def set_sex():
+    while True:
+        response = input("").lower().strip()        
+        if response == 'f' or response == 'm' or response == 'd':
+            sex = response
+            break
+        else:
+            print("Sorry, please enter either 'F', 'M', or 'D'")  
+    return sex
+
 def set_subjects():
     subjects = []    
     subject = input("").lower().strip()
     subjects.append(subject)
     while True:
-        print("If you would like to learn/teach anything else, please enter that subject. Or, type '0' if you are finished specifying errthang.")
+        print("If you would like to add another subject, please enter that subject. Or, type '0' if you are finished specifying errthang.")
         subject = input("")
         if subject == '0':
             break
@@ -114,21 +123,26 @@ def set_price_range():
     
     return min_price, max_price
     
-def set_weboption_or_chill():
-    print("Would you like to add a webcam tutor session option? Type 'Y' for yes or 'N' for no.")    
+def set_weboption(): 
     while True:
         response = input("").lower().strip()        
         if response == 'y':
             weboption = True
-            print("You can now find tutors who offer webcam tutoring sessions!")
             break
         elif response == 'n':
-            weboption = False
-            print("You will not be able to find tutors who offer webcam tutoring sessions!")                        
+            weboption = False                     
             break
         else:
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
+
+def set_cost():
+    print("Please specify your price per tutoring session")
+    cost = input("$")
+    while not cost.isdigit():
+        print("Please enter number values!")
+        cost = input("$")    
+    return float(cost)
   
 def review_information_for_tutee(tutee):
     print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
@@ -179,10 +193,11 @@ def sign_up_tutee():
     location = set_location()
     print("What is your preferred sex for a tutor? Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
     preferred_sex = set_preferred_sex()
-    print("Please specify the subject you would like to learn.")  
+    print("Please specify the subject you would like to learn.")
     subjects = set_subjects()
     min_price, max_price = set_price_range()
-    weboption = set_weboption_or_chill()
+    print("Would you like to add a webcam tutor session option? Type 'Y' for yes or 'N' for no.") 
+    weboption = set_weboption()
     
     tutee = Tutee(username, full_name, password, education_level, grade_year, location, preferred_sex, subjects, min_price, max_price, weboption)
     tutees.append(tutee)
@@ -190,15 +205,21 @@ def sign_up_tutee():
     print("Congratulations! You have successfully signed up as a tutee.")
     print("------------------------------------")
     review_information_for_tutee(tutee)
-    
+   
 def sign_up_tutor():
     full_name, username, password = set_username_and_password()
     education_level, grade_year = set_grade_level()
     location = set_location()
+    print("Enter your sex. Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
     sex = set_sex()
+    print("Please specify the subject you would like to teach.")
     subjects = set_subjects()
-    min_price, max_price = set_price_range()
-    weboption = set_weboption_or_chill()
+    cost = set_cost()
+    print("Would you like to provide a webcam tutor session option? Type 'Y' for yes or 'N' for no.") 
+    weboption = set_weboption()
+  
+    tutor = Tutor(username, full_name, password, education_level, grade_year, location, sex, subjects, cost, weboption)
+    tutors.append(tutor)         
          
 def homepage():
     print("Welcome sickerdogs and demons!\n")
