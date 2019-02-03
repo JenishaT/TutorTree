@@ -147,7 +147,7 @@ def review_information_for_tutee(tutee):
             for subject in tutee.subjects:
                 subjects_s += subject + ", "
             print("Subjects:", subjects_s)
-            print("Weboption:", weboption)
+            print("Weboption:", tutee.weboption)
             print("Min price:", tutee.min_price)
             print("Max price:", tutee.max_price)
             print("If you would like to change any of the information shown above, type 'Y', or otherwise, type 'N'.")
