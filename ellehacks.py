@@ -9,7 +9,11 @@
 # search function to put down tutors and rate em
 
 from tutee import Tutee
+from tutor import Tutor
+
 tutees = [] 
+tutors = []
+
 
 def change_username():
     print("Please choose your new username.")
@@ -72,7 +76,6 @@ def set_location():
     return location
 
 def set_preferred_sex():
-    print("What is your preferred sex for a tutor? Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
     while True:
         response = input("").lower().strip()        
         if response == 'f' or response == 'm' or response == 'd':
@@ -85,7 +88,6 @@ def set_preferred_sex():
 
 def set_subjects():
     subjects = []    
-    print("Please specify the subject you would like to learn.")  
     subject = input("").lower().strip()
     subjects.append(subject)
     while True:
@@ -175,7 +177,9 @@ def sign_up_tutee():
     full_name, username, password = set_username_and_password()
     education_level, grade_year = set_grade_level()
     location = set_location()
+    print("What is your preferred sex for a tutor? Type 'F' for female, type 'M' for male, or, type 'D' for doesn't matter lol.")
     preferred_sex = set_preferred_sex()
+    print("Please specify the subject you would like to learn.")  
     subjects = set_subjects()
     min_price, max_price = set_price_range()
     weboption = set_weboption_or_chill()
