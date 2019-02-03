@@ -26,7 +26,7 @@ def set_username_and_password():
     fname = input("")
     print("Please enter your last name.")
     lname = input("")
-    full_name = fname + lname
+    full_name = fname + " " + lname
     
     print("Please enter your username")
     username = input("")
