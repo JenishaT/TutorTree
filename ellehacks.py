@@ -97,12 +97,19 @@ def set_subjects():
     return subjects
         
 def set_price_range():
-    ####INCOMPLETE HAVE TO VALIDATE THIS!!!!!!!!####
-    print("Please specify your price range.")    
-    while min_price.isdigit() and max_price.isdigit():
+    print("Please specify your price range.")
+    min_price = input("Min: $")
+    max_price = input("Max: $")    
+    while not min_price.isdigit() and not max_price.isdigit():
+        print("Please enter numbered values!")
         min_price = input("Min: $")
         max_price = input("Max: $")
-        
+    
+    while float(max_price) < float(min_price) or float(min_price) < 0:
+        print("You have entered nonsense! Please enter valid inputs for min and max price.\nMin must be greater than 0 and less than max price, dumbass lol (you need quick maths but dw we're here to help :).")
+        min_price = float(input("Min: $"))
+        max_price = float(input("Max: $"))
+    
     return min_price, max_price
     
 def set_weboption_or_chill():
@@ -120,7 +127,7 @@ def set_weboption_or_chill():
         else:
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
-
+  
 def review_information_for_tutee(tutee):
     print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
     print("Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
@@ -182,7 +189,14 @@ def sign_up_tutee():
     print("------------------------------------")
     review_information_for_tutee(tutee)
     
-
+def sign_up_tutor():
+    full_name, username, password = set_username_and_password()
+    education_level, grade_year = set_grade_level()
+    location = set_location()
+    sex = set_sex()
+    subjects = set_subjects()
+    min_price, max_price = set_price_range()
+    weboption = set_weboption_or_chill()
          
 def homepage():
     print("Welcome sickerdogs and demons!\n")
@@ -223,4 +237,3 @@ homepage()
 
 
 
-    
