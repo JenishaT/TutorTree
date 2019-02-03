@@ -6,11 +6,11 @@
 # def find_tutee:
 # def find_tutor:
 # log out page that goes back to the homepage
+# search function to put down tutors and rate em
+
 from tutee import Tutee
-from tutor import Tutor
 tutees = [] 
 
-# tutee and tutor functions
 def change_username():
     print("Please choose your new username.")
     username = input("")
@@ -36,8 +36,9 @@ def set_username_and_password():
     
     return full_name, username, password
 
+    
 def set_grade_level():
-    print("Please indicate your most recent level of education by typing 'P' for primary (grades 1 - 8),\n'S' for secondary (grades 9 - 12), or 'PS' for post secondary (university/college level education)")
+    print("Please indicate your current level of education by typing 'P' for primary (grades 1 - 8),\n'S' for secondary (grades 9 - 12), or 'PS' for post secondary (university/college level education)")
     while True:
         education_level = input("").lower().strip()
         if education_level == 'p' or education_level == 's' or education_level == 'ps':         
@@ -46,7 +47,7 @@ def set_grade_level():
             print("Sorry, please enter either 'P', 'S', or 'PS")
             
     while True:
-            print("Please indicate your most recent year of study.")
+            print("Please indicate your current year of study.")
             grade_year = int(input(""))
             if education_level == 'p':
                 if not 1 <= grade_year <= 8:
@@ -93,12 +94,15 @@ def set_subjects():
         if subject == '0':
             break
         subjects.append(subject)
+    return subjects
         
 def set_price_range():
     ####INCOMPLETE HAVE TO VALIDATE THIS!!!!!!!!####
-    print("Please specify your price range.")
-    min_price = int(input("Min: $"))
-    max_price = int(input("Max: $"))    
+    print("Please specify your price range.")    
+    while min_price.isdigit() and max_price.isdigit():
+        min_price = input("Min: $")
+        max_price = input("Max: $")
+        
     return min_price, max_price
     
 def set_weboption_or_chill():
@@ -111,18 +115,19 @@ def set_weboption_or_chill():
             break
         elif response == 'n':
             weboption = False
+            print("You will not be able to find tutors who offer webcam tutoring sessions!")                        
             break
         else:
-            print("You will not be able to find tutors who offer webcam tutoring sessions!")            
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
 
 def review_information_for_tutee(tutee):
     print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
     print("Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
-    while True:
-        response = input("")
-        if response == 'R':
+    x = True
+    while x:
+        response = input("").lower().strip()
+        if response == 'r':
             print("Your profile information is as shown below:")
             print("Name:", tutee.full_name)
             print("Username:", tutee.username)
@@ -131,28 +136,36 @@ def review_information_for_tutee(tutee):
             print("Year of study:", tutee.grade_year)
             print("Location:", tutee.location)
             print("Preferred sex of tutor:", tutee.preferred_sex)
-            subjects_s = ""
-            for subject in subjects:
-                subject_s + " " + subject 
+            subjects_s = " "
+            for subject in tutee.subjects:
+                subjects_s += subject + ", "
             print("Subjects:", subjects_s)
+            print("Weboption:", weboption)
             print("Min price:", tutee.min_price)
             print("Max price:", tutee.max_price)
-            print("If you would like to change any of the information shown above, type 'Y', otherwise, type 'N'.")
+            print("If you would like to change any of the information shown above, type 'Y', or otherwise, type 'N'.")
             while True:
-                response = input("")
-                if response == 'Y':
+                response = input("").lower().strip()
+                if response == 'y':
+                    print("you're changing ya info")
                     #change_information()
+                    x = False
                     break
-                elif response == 'N':
+                elif response == 'n':
+                    print("okurr so youve decided to not change your info nyeah")                    
                     #find_tutors()
+                    x = False
                     break
-                print("Sorry, please enter either 'Y' or 'N'.")      
-        elif response == 'N':
+                print("Sorry, please enter either 'Y' or 'N'.")
+            break
+        elif response == 'b':
             #find_tutors()
             break
-        print("Sorry, please enter either 'R' or 'B'.")
+        else:
+            print("Sorry, please enter either 'R' or 'B'.")
     
     
+
 def sign_up_tutee():
     full_name, username, password = set_username_and_password()
     education_level, grade_year = set_grade_level()
@@ -165,19 +178,11 @@ def sign_up_tutee():
     tutee = Tutee(username, full_name, password, education_level, grade_year, location, preferred_sex, subjects, min_price, max_price, weboption)
     tutees.append(tutee)
         
-    ## INCOMPLETE, ASK TO REVIEW INFORMATION.
     print("Congratulations! You have successfully signed up as a tutee.")
     print("------------------------------------")
-    review_information(tutee)
+    review_information_for_tutee(tutee)
     
-def sign_up_tutor():
-    full_name, username, password = set_username_and_password()
-    education_level, grade_year = set_grade_level()
-    location = set_location()
-    preferred_sex = set_preferred_sex()
-    subjects = set_subjects()
-    min_price, max_price = set_price_range()
-    weboption = set_weboption_or_chill()
+
          
 def homepage():
     print("Welcome sickerdogs and demons!\n")
