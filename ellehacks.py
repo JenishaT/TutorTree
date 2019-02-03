@@ -116,20 +116,42 @@ def set_weboption_or_chill():
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
 
-def review_information(tutee):
+def review_information_for_tutee(tutee):
     print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
     print("Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
-    print("Your profile information is as shown below:")
-    print("Name:", tutee.full_name)
-    print("Username:", tutee.username)
-    print("Password:", tutee.password)
-    print("Education level:", tutee.education_level)
-    print("Year of study:", tutee.grade_year)
-    print("Location:", tutee.location)
-    print("Preferred sex of other man:", tutee.preferred_sex)
-    #print("S", subjects)
-    #print price rage
-    print("Weboption:", tutee.weboption)
+    while True:
+        response = input("")
+        if response == 'R':
+            print("Your profile information is as shown below:")
+            print("Name:", tutee.full_name)
+            print("Username:", tutee.username)
+            print("Password:", tutee.password)
+            print("Education level:", tutee.education_level)
+            print("Year of study:", tutee.grade_year)
+            print("Location:", tutee.location)
+            print("Preferred sex of tutor:", tutee.preferred_sex)
+            subjects_s = ""
+            for subject in subjects:
+                subject_s + " " + subject 
+            print("Subjects:", subjects_s)
+            print("Min price:", tutee.min_price)
+            print("Max price:", tutee.max_price)
+            print("If you would like to change any of the information shown above, type 'Y', otherwise, type 'N'.")
+            while True:
+                response = input("")
+                if response == 'Y':
+                    #change_information()
+                    break
+                elif response == 'N':
+                    #find_tutors()
+                    break
+                print("Sorry, please enter either 'Y' or 'N'.")      
+        elif response == 'N':
+            #find_tutors()
+            break
+        print("Sorry, please enter either 'R' or 'B'.")
+    
+    
 
 def sign_up_tutee():
     full_name, username, password = set_username_and_password()
