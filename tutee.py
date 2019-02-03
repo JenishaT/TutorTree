@@ -3,8 +3,8 @@ class Tutee:
     username = ""
     full_name = ""
     password = ""
-    education = ""
-    grade_level = 0
+    education_level = ""
+    grade_year = 0
     location = ""
     preferred_sex = ""
     subjects = [] 
@@ -16,8 +16,8 @@ class Tutee:
         self.username = username
         self.full_name = full_name
         self.password = password
-        self.education = education
-        self.grade_level = grade_level
+        self.education_level = education
+        self.grade_year = grade_level
         self.location = location
         self.preferred_sex = preferred_sex
         self.subjects = subjects 
