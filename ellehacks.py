@@ -128,7 +128,27 @@ def set_cost():
         print("Please enter number values!")
         cost = input("$")    
     return float(cost)
-  
+def display_tutors(sorted_tutors):
+    pass
+
+    
+def order_tutors(tutee, tutors):
+    matches = {}
+    for tutor in tutors:
+        matches[tutor.username] = 0
+        if tutor.education_level == tutee.education_level and tutor.grade_year >= tutee.grade_year and tutor.location == tutee.location:
+            if tutor.sex == tutee.preferred_sex:
+                matches[tutor] += 1
+            elif tutee.preferred_sex == 'E':
+                matches[tutor.username] += 1
+            for subject in tutee.subjects:
+                if subject in tutor.subjects:
+                    matches[tutor.username] += 1
+            if tutor.weboption == tutee.weboption:
+                matches[tutor.username] += 1
+    sorted_tutors = sorted(matches, key=matches.get, reverse=True)
+    display_tutors(sorted_tutors, matches)
+    
 def welcome_tutee(tutee):
     print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
     print("Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
@@ -246,7 +266,20 @@ def sign_up_tutor():
     
     print("Congratulations! You have successfully signed up as a tutor.")
     print("------------------------------------")
-    welcome_tutor(tutor)   
+    welcome_tutor(tutor)  
+
+def login(tutees, tutors):
+    username = input("Please enter your username.")
+    password = input("Please type your password.")
+    for tutee in tutees:
+        if username == tutee.username and password == tutee.password:
+            print("Welcome back,", username)
+            welcome_tutee(tutee)
+            
+    for tutor in tutors:
+        if username == tutors.username and password == tutors.password:
+            print("Welcome back,", username)
+            #welcome_tutor(tutor)    
     
 def homepage():
     print("Welcome to TutorTree")
