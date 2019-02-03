@@ -6,6 +6,8 @@
 # def find_tutee:
 # def find_tutor:
 # log out page that goes back to the homepage
+from tutee import Tutee
+tutees = [] 
 
 def change_username():
     print("Please choose your new username.")
@@ -57,10 +59,10 @@ def set_grade_level():
                     break 
             if education_level == 'ps':
                 if not 1 <= grade_year <= 7:
-                    print("Sorry, your grade is not post secondary level. Please enter a post secondary grade level (years 1 - 6).") 
+                    print("Sorry, your grade is not post secondary level. Please enter a post secondary grade level (years 1 - 7).") 
                 else:
                     break    
-        return education_level, grade_year
+    return education_level, grade_year
 
 def set_location():
     print("Please enter your city (so that we can find tutors near yooouuuuuuuu crank that souja boi!)")
@@ -77,7 +79,7 @@ def set_preferred_sex():
             break
         else:
             print("Sorry, please enter either 'F', 'M', or 'D'")  
-        return preferred_sex
+    return preferred_sex
 
 def set_subjects():
     subjects = []    
@@ -114,9 +116,20 @@ def set_weboption_or_chill():
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
 
-def review_information():
-    pass
-    #INCOMPLETE. FINISH THIS
+def review_information(tutee):
+    print("Welcome,", tutee.full_name, ". Would you like to review your profile information?")
+    print("Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
+    print("Your profile information is as shown below:")
+    print("Name:", tutee.full_name)
+    print("Username:", tutee.username)
+    print("Password:", tutee.password)
+    print("Education level:", tutee.education_level)
+    print("Year of study:", tutee.grade_year)
+    print("Location:", tutee.location)
+    print("Preferred sex of other man:", tutee.preferred_sex)
+    #print("S", subjects)
+    #print price rage
+    print("Weboption:", tutee.weboption)
 
 def sign_up_tutee():
     full_name, username, password = set_username_and_password()
@@ -126,12 +139,16 @@ def sign_up_tutee():
     subjects = set_subjects()
     min_price, max_price = set_price_range()
     weboption = set_weboption_or_chill()
+    
+    tutee = Tutee(username, full_name, password, education_level, grade_year, location, preferred_sex, subjects, min_price, max_price, weboption)
+    tutees.append(tutee)
         
     ## INCOMPLETE, ASK TO REVIEW INFORMATION.
-    print("Congratulations! You have successfully signed up as a tutee.\n Type 'R' if you would like to review your profile, or type 'B' to begin looking for tutors.")
+    print("Congratulations! You have successfully signed up as a tutee.")
+    print("------------------------------------")
+    review_information(tutee)
     
-    
-    
+
          
 def homepage():
     print("Welcome sickerdogs and demons!\n")
