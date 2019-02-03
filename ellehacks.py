@@ -219,7 +219,11 @@ def sign_up_tutor():
     weboption = set_weboption()
   
     tutor = Tutor(username, full_name, password, education_level, grade_year, location, sex, subjects, cost, weboption)
-    tutors.append(tutor)         
+    tutors.append(tutor)
+    
+    print("Congratulations! You have successfully signed up as a tutor.")
+    print("------------------------------------")
+    welcome_tutor(tutor) 
          
 def homepage():
     print("Welcome sickerdogs and demons!\n")
