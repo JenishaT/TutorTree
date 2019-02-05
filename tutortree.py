@@ -1,17 +1,11 @@
-# def profile: #(checks if user is a tutee or tutor)
-# def find_tutee:
-# def find_tutor:
-# log out page that goes back to the homepage
-# search function to put down tutors and rate em
-
 from tutee import Tutee
 from tutor import Tutor
 tutees = [] 
 tutors = []
 
 def logout():
-    print("Thanks for working with us!")
-    print("Logging Out........\n\n")
+    print("Thank you for choosing TutorTree!")
+    print("Logging Out..\n\n")
     homepage()
     
 def change_username():
@@ -125,7 +119,6 @@ def set_weboption():
             print("Sorry, please enter either 'Y' or 'N'") 
     return weboption
 
-## My shit
 def set_cost():
     print("Please specify your price per tutoring session")
     cost = input("$")
@@ -164,13 +157,13 @@ def order_tutors(tutee, tutors):
                 matches[tutor.username] += 1
     sorted_tutors = sorted(matches, key=matches.get, reverse=True)
     display_tutors(sorted_tutors)
-    print("Type 'R' to go return to the previous screen")
+    print("Type 'R' to return to the previous screen")
     while True:
         response = input("").lower().strip()        
         if response == 'r':
             welcome_tutee(tutee)
         else:
-            print("Please enter 'R', to go back")      
+            print("Please type 'R', to go back")      
     
 def welcome_tutee(tutee):
     print("Welcome,", tutee.full_name, "Would you like to review your profile information?")
@@ -202,6 +195,7 @@ def welcome_tutee(tutee):
                 break
             elif response == 'l':
                 logout()
+                break
             else:
                 print("Sorry, please enter either 'B' or 'L'")            
             
@@ -222,6 +216,9 @@ def welcome_tutee(tutee):
         elif response == 'b':
             order_tutors(tutee, tutors)
             break
+        elif response == 'l':
+            logout()
+            break        
         else:
             print("Sorry, please enter either 'R', 'B', 'L'")
             
