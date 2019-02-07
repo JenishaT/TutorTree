@@ -147,7 +147,7 @@ def order_tutors(tutee, tutors):
         matches[tutor.username] = 0
         if tutor.education_level == tutee.education_level and tutor.grade_year >= tutee.grade_year and tutor.location == tutee.location:
             if tutor.sex == tutee.preferred_sex:
-                matches[tutor] += 1
+                matches[tutor.username] += 1
             elif tutee.preferred_sex == 'E':
                 matches[tutor.username] += 1
             for subject in tutee.subjects:
@@ -345,7 +345,7 @@ def homepage():
         
         if action == '0':
             print("------------------------------------")
-            print("Welcome to our sick site! Are you a tutee or tutor?\n")
+            print("Welcome to our site! Are you a tutee or tutor?\n")
             print("Type 0 for tutee")
             print("Type 1 for tutor\n")
             while True: 
